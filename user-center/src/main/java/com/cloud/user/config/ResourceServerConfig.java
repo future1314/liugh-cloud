@@ -18,21 +18,25 @@ import com.cloud.common.constants.PermitAllUrl;
  * @author liugh 53182347@qq.com
  *
  */
-@EnableResourceServer
+@EnableResourceServer //每个url就是一种资源
+//spring security的注解  prePostEnabled = true表示controller层的 @PreAuthorize("hasAuthority('back:role:save')")开启注解
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable().exceptionHandling()
-				.authenticationEntryPoint(
+		http.csrf().disable().
+				//异常的时候处理 返回SC_UNAUTHORIZED --> 401状态码未授权异常
+				exceptionHandling().authenticationEntryPoint(
 						(request, response, authException) -> response.sendError(HttpServletResponse.SC_UNAUTHORIZED))
 				.and().authorizeRequests()
+				//放行注解url
 				.antMatchers(PermitAllUrl.permitAllUrl("/users-anon/**", "/wechat/**")).permitAll() // 放开权限的url
 				.anyRequest().authenticated().and().httpBasic();
 	}
 
+	//spring security内置密码加密的bean
 	@Bean
 	public BCryptPasswordEncoder bCryptPasswordEncoder() {
 		return new BCryptPasswordEncoder();

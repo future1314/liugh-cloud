@@ -7,9 +7,9 @@ spring:
         enabled: true
         serviceId: config-center
       profile: dev
-      fail-fast: false
+      fail-fast: true #在没有连接配置服务端时直接启动失败
 server:
-  port: 0
+  port: 0  #随机端口号
 eureka:
   client:
     serviceUrl:

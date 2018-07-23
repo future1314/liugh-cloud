@@ -32,7 +32,7 @@ spring:
         max-wait: -1ms
   mvc:
     servlet:
-      load-on-startup: 1
+      load-on-startup: 1 #意思是在启动时,DispatcherServlet就加载
   aop:
     proxy-target-class: true
   zipkin:
@@ -48,7 +48,7 @@ mybatis:
 security:
   oauth2:
     resource:
-      user-info-uri: http://127.0.0.1:8080/api-o/user-me #网关
+      user-info-uri: http://127.0.0.1:8080/api-o/user-me #网关,此接口可以回去用户信息
       prefer-token-info: false
 wechat:
   domain: http://127.0.0.1:8080/api-u

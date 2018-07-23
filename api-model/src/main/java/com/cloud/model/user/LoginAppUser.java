@@ -33,6 +33,7 @@ public class LoginAppUser extends AppUser implements UserDetails {
 		Collection<GrantedAuthority> collection = new HashSet<>();
 		if (!CollectionUtils.isEmpty(sysRoles)) {
 			sysRoles.forEach(role -> {
+				//spring security的角色默认加 "ROLE_"
 				if (role.getCode().startsWith("ROLE_")) {
 					collection.add(new SimpleGrantedAuthority(role.getCode()));
 				} else {
