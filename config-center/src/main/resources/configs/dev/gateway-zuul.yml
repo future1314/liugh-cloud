@@ -12,13 +12,18 @@ logging:
     root: info
     com.cloud: debug
   file: logs/${spring.application.name}.log
+#转发规则的核心配置
 zuul:
+ #忽略所有的service其实就只会找底下配置的service
   ignored-services: '*'
+  #忽略的header
   sensitiveHeaders: 
   routes:
     oauth:
       path: /api-o/**
       serviceId: oauth-center
+      #如果是false的话,当转发到oauth-center时,/api-o路径不会省略
+#      stripPrefix: false
     api-u:
       path: /api-u/**
       serviceId: user-center
@@ -37,6 +42,7 @@ zuul:
   host:
     connect-timeout-millis: 10000
     socket-timeout-millis: 60000
+  #带上代理的header,header信息转发时也会带上
   add-proxy-headers: true
   ribbon:
     eager-load:

@@ -18,9 +18,11 @@ import com.cloud.common.constants.PermitAllUrl;
  * 该filter帮我们从request里解析出access_token<br>
  * 并通过org.springframework.security.oauth2.provider.token.DefaultTokenServices根据access_token和认证服务器配置里的TokenStore从redis或者jwt里解析出用户
  * 
- * 注意认证中心的@EnableResourceServer和别的微服务里的@EnableResourceServer有些不同<br>
- * 别的微服务是通过org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoTokenServices来获取用户的
- * 
+ * 注意认证中心的@EnableResourceServer和别的微服务里的@EnableResourceServer有些不同<br> 在OAuth2AuthenticationManager里看
+ * 别的微服务是通过org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoTokenServices来获取用户的,认证中心是DefaultTokenServices
+ * UserInfoTokenServices的方法getMap(String path, String accessToken)
+ * 就是通过配置文件里的security.oauth2.resource.user-info-uri: http://127.0.0.1:8080/api-o/user-me 加上token发起了一次get请求
+ * 然后把map转换成OAuth2Authentication当前登录用户对象
  * @author liugh 53182347@qq.com
  *
  */

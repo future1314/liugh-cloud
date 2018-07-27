@@ -21,6 +21,7 @@ import com.netflix.zuul.context.RequestContext;
  * @author liugh 53182347@qq.com
  *
  */
+//内部的匿名接口,eg:/users-anon/internal,虽然一些接口是匿名的,但只通过内部微服务调用,而不暴露给外界
 @Component
 public class InternalURIAccessFilter extends ZuulFilter {
 

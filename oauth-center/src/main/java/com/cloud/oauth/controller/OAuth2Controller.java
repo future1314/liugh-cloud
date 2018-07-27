@@ -117,7 +117,7 @@ public class OAuth2Controller {
                 Log log = Log.builder().username(username).module(LogModule.LOGOUT).createTime(new Date()).build();
                 logClient.save(log);
             } catch (Exception e) {
-                // do nothing
+                // do nothing 这里没做处理,重要日志还是要抛消息
             }
 
         });

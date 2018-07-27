@@ -123,21 +123,21 @@ public class TokenController {
      */
     private void saveLoginLog(String username, String remark) {
         log.info("{}登陆", username);
-        // 异步
+        // 异步,目前是记录日志  自己可以改成mq方式
         CompletableFuture.runAsync(() -> {
             try {
                 Log log = Log.builder().username(username).module(LogModule.LOGIN).remark(remark).createTime(new Date())
                         .build();
                 logClient.save(log);
             } catch (Exception e) {
-                // do nothing
+                // do nothing 这里没做处理,重要日志还是要抛消息
             }
 
         });
     }
 
     /**
-     * 系统刷新refresh_token
+     * 传入系统刷新refresh_token,这里就会帮你刷新access_token
      *
      * @param refresh_token
      * @return
@@ -160,6 +160,7 @@ public class TokenController {
      * @param access_token
      */
     @GetMapping("/sys/logout")
+    //access_token请求参数或者@RequestHeader参数里的Authorization字段
     public void logout(String access_token, @RequestHeader(required = false, value = "Authorization") String token) {
         if (StringUtils.isBlank(access_token)) {
             if (StringUtils.isNoneBlank(token)) {

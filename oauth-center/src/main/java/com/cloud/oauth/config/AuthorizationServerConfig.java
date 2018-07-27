@@ -35,6 +35,7 @@ import java.util.Map;
  * @author liugh 53182347@qq.com
  */
 @Configuration
+//认证中心注解
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
@@ -65,10 +66,11 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     private RedisClientDetailsService redisClientDetailsService;
 
     /**
-     * 令牌存储
+     * 令牌存储.存储到redis或者用jwt
      */
     @Bean
     public TokenStore tokenStore() {
+        //OAuth2AuthenticationManager.class里有tokenServices来获取当前登录用户信息
         if (storeWithJwt) {
             return new JwtTokenStore(accessTokenConverter());
         }

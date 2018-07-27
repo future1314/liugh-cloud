@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  * @author liugh 53182347@qq.com
  * 
  */
+//通过添加一个身份验证过滤器和一个认证入口点
 @EnableOAuth2Sso
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {

@@ -18,6 +18,7 @@ import com.cloud.common.constants.PermitAllUrl;
  * @author liugh 53182347@qq.com
  *
  */
+//注解@EnableResourceServer帮我们加入了org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationProcessingFilter<br>
 @EnableResourceServer //每个url就是一种资源
 //spring security的注解  prePostEnabled = true表示controller层的 @PreAuthorize("hasAuthority('back:role:save')")开启注解
 @EnableWebSecurity
