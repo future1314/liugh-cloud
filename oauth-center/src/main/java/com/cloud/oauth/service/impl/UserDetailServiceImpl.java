@@ -50,7 +50,6 @@ public class UserDetailServiceImpl implements UserDetailsService {
         } else if (!loginAppUser.isEnabled()) {
             throw new DisabledException("用户已作废");
         }
-
         if (params.length > 1) {
             // 登录类型
             CredentialType credentialType = CredentialType.valueOf(params[1]);

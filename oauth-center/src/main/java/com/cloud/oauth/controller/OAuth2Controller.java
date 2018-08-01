@@ -30,7 +30,7 @@ public class OAuth2Controller {
      * <p>
      * 因此这只是一种写法，下面注释掉的三个方法也都一样，这四个方法任选其一即可，也只能选一个，毕竟uri相同，否则启动报错<br>
      * 2018.05.23改为默认用这个方法，好理解一点
-     *
+     * 配置里的接口就是该方法 http://127.0.0.1:8080/api-o/user-me
      * @return
      */
     @GetMapping("/user-me")
@@ -115,11 +115,11 @@ public class OAuth2Controller {
         CompletableFuture.runAsync(() -> {
             try {
                 Log log = Log.builder().username(username).module(LogModule.LOGOUT).createTime(new Date()).build();
+                //如果不想用FeignClient的话,可以用RabbitMQ方式发送到队列里
                 logClient.save(log);
             } catch (Exception e) {
                 // do nothing 这里没做处理,重要日志还是要抛消息
             }
-
         });
     }
 

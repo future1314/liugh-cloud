@@ -18,7 +18,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
  * @author liugh 53182347@qq.com
  * 
  */
+//通过 @EnableWebSecurity注解开启Spring Security的功能。
 @EnableWebSecurity
+// 可以开启security的注解，我们可以在需要控制权限的方法上面使用@PreAuthorize，@PreFilter这些注解。
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -46,7 +48,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	/**
 	 * 认证管理
-	 * 
 	 * @return 认证管理对象
 	 * @throws Exception
 	 *             认证异常信息
@@ -59,7 +60,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	/**
 	 * http安全配置
-	 * 
 	 * @param http
 	 *            http安全对象
 	 * @throws Exception
@@ -70,7 +70,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 				.antMatchers(PermitAllUrl.permitAllUrl()).permitAll() // 放开权限的url
 				.anyRequest().authenticated().and()
-				.httpBasic().and().csrf().disable();
+				.httpBasic().and().csrf().disable();//禁用跨站请求伪造
 	}
 
 }

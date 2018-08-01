@@ -48,7 +48,8 @@ mybatis:
 security:
   oauth2:
     resource:
-      user-info-uri: http://127.0.0.1:8080/api-o/user-me #网关,此接口可以回去用户信息,网关层根据/api-o转发到认证中心
+#      user-info-uri: http://127.0.0.1:8080/api-o/user-me #网关,此接口可以回去用户信息,网关层根据/api-o转发到认证中心
+      user-info-uri: http://127.0.0.1:8888/user-me #网关,此接口可以回去用户信息,网关层根据/api-o转发到认证中心
       prefer-token-info: false
 wechat:
   domain: http://127.0.0.1:8080/api-u
