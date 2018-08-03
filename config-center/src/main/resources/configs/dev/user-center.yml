@@ -40,6 +40,10 @@ spring:
     enabled: true
     sender:
       type: web
+#	zipkin 统计比率设置 没有配置，将默认采用0.1 在SamplerProperties类里 取值范围是0-1  如改成1的话，将收集全部请求
+#  sleuth:
+#    sampler:
+#      percentage: 0.2
 mybatis:
   type-aliases-package: com.cloud.model.user
   mapper-locations: classpath:/mybatis-mappers/*
